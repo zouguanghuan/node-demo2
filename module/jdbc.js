@@ -1,14 +1,12 @@
-const mysql = require('mysqls')
+const mysql = require('mysql')
 
 const connecttion = mysql.createConnection({
-  host:'localhost',
+  host: 'localhost',
   user: 'root',
   password: '123456',
-  database: 'zouguanghuan'
+  database: 'node-start'
 })
 
 connecttion.connect()
 
-module.exports={
-  connecttion
-}
+module.exports = connecttion

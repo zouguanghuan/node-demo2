@@ -1,22 +1,28 @@
 const express = require('express'),
-route = express.Router();
+  route = express.Router();
+User = require('../module/jdbc')
 
-const {readFile, writeFile} = require('./myFs/myFs'),
-{responseInfo, againMd5} = require('./util/util');
+const { readFile, writeFile } = require('../myFs/myFs'),
+  { responseInfo, againMd5 } = require('../util/util');
 // 可以理解route和创建的app没有区别
-route.use(async  (req, res, next)=>{
- req.$USER = await readFile('./mock/user.json');
- req.$USER = JSON.parse(req.$USER);
- next();
-})
+
 // 正常登陆
-route.post('/login',async  (req, res, next)=>{
-  let {name, password, type = 1} = res.body
+route.post('/login', (req, res, next) => {
+  let { name, password } = res.body
   // 对密码进行二次加密
-  password = againMd5(password)
-})
+  console.log(name, password, '-----')
+  if (name == 'zou' && password == '123456') {
+    responseInfo(res, {
+      code: 1,
+      codeText: '成功啦'
+    });
+    return
+  }
+  responseInfo(res, {
+    code: 2,
+    codeText: '失败'
+  })
+});
 
 
-module.exports = {
-  route
-}
+module.exports = route
