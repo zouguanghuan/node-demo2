@@ -1,5 +1,5 @@
-const express = require('express'),
-  bodyParser = require('body-parser'),
+const bodyParser = require('body-parser'),
+  express = require('express'),
   session = require('express-session'),
   app = express();
 
@@ -26,6 +26,9 @@ app.use((req, res, next) => {
 app.use(bodyParser.urlencoded({
   extended: false
 }));
+
+//配置post请求中的bodyParser，可以直接使用req.body-req.query
+app.use(bodyParser.json())
 
 
 app.use(session(config.session));

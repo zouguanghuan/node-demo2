@@ -8,7 +8,8 @@ const { readFile, writeFile } = require('../myFs/myFs'),
 
 // 正常登陆
 route.post('/login', (req, res, next) => {
-  let { name, password } = res.body
+  console.log(req)
+  let { name, password } = req.body
   // 对密码进行二次加密
   console.log(name, password, '-----')
   if (name == 'zou' && password == '123456') {
